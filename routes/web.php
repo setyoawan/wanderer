@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Post as ControllersPost;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,20 +14,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// closure, anonimous function 
 Route::get('/', function () {
     return view('home', [
         "title" => "Home"
     ]);
 });
 
-Route::get('/blog', function () {
-    return view('blog', [
-        "title" => "Blog"
+Route::get('/about', function () {
+    return view('about',[
+        "title" => "About"
     ]);
 });
 
-Route::get('/about', function () {
-    return view('about',[
-        "title" => "ABout"
-    ]);
-});
+Route::get('/blog', [ControllersPost::class, 'index']);
+Route::get('/posts/{post}', [ControllersPost::class, 'show']);
+
